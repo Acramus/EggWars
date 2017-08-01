@@ -1,0 +1,7 @@
+generator:
+  start_level: 1
+  world: "world"
+  x: 0
+  y: 128
+  z: 0
+  base_file: "example_base"

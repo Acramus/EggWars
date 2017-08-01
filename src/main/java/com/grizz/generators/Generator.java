@@ -15,14 +15,18 @@ import java.util.Collection;
  */
 public class Generator {
 
+    private Eggwars ew;
     @Getter private Location location;
     @Getter private GeneratorSettings settings;
     @Getter @Setter private GeneratorLevel level;
 
     @Getter @Setter protected int runId;
 
-    public Generator(Location location, GeneratorSettings settings, GeneratorLevel level) {
-
+    public Generator(Eggwars ew, Location location, GeneratorSettings settings, GeneratorLevel level) {
+        this.ew = ew;
+        this.location = location;
+        this.settings = settings;
+        this.level = level;
     }
 
     public boolean tryStart() {
@@ -38,7 +42,7 @@ public class Generator {
      * TODO: Run start.
      */
     private void start() {
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(Eggwars.get(), new Runnable() {
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(ew, new Runnable() {
             @Override
             public void run() {
                 /*

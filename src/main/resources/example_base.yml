@@ -1,0 +1,21 @@
+name: "Example"
+upgrades:
+  0:
+    ticks: -1
+    max_drops: 0
+  1:
+    ticks: 100
+    max_drops: 0
+  2:
+    ticks: 20
+    max_drops: 0
+  3:
+    ticks: 10
+    max_drops: 0
+item:
+  material: "DIAMOND"
+  amount: 1
+  display_name: "&bDiamond"
+  lore:
+  - "This is"
+  - "a lore!"

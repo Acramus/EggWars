@@ -1,0 +1,6 @@
+name: EggWars
+version: 0.1
+main: com.grizz.eggwars.EggWars
+commands:
+  test:
+    description: Tests EggWars gens!

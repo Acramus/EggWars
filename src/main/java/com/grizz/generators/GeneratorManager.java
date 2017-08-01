@@ -1,5 +1,6 @@
 package com.grizz.generators;
 
+import com.grizz.Eggwars;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -13,13 +14,19 @@ import java.util.Set;
  */
 public class GeneratorManager {
 
+    private Eggwars ew;
     private Set<Generator> generators = new HashSet<>();
 
     // Singleton Structure
 
-    private static GeneratorManager gm = new GeneratorManager();
+    private static GeneratorManager gm = null;
 
-    protected GeneratorManager() {}
+    public GeneratorManager(Eggwars ew) {
+        this.ew = ew;
+        if(gm == null) {
+            gm = this;
+        }
+    }
 
     public static GeneratorManager get() {
         return gm;
@@ -33,13 +40,16 @@ public class GeneratorManager {
                 conf.getInt("generator.x"),
                 conf.getInt("generator.y"),
                 conf.getInt("generator.z"));
-        int level = conf.getInt("level");
-        File base = new File(conf.getString("generator.base_file"));
+        int level = conf.getInt("generator.start_level");
+        String basePath = conf.getString("generator.base_file");
+        File base = new File(basePath.endsWith(".yml") ? basePath : basePath + ".yml");
 
         YamlConfiguration baseConf = YamlConfiguration.loadConfiguration(base);
-        return new Generator(location, new GeneratorSettings(base), new GeneratorLevel(level,
+        Generator gen =  new Generator(ew, location, new GeneratorSettings(base), new GeneratorLevel(level,
                 baseConf.getInt("upgrades." + level + ".max_drops"),
                 baseConf.getLong("upgrades." + level + ".ticks")));
+        generators.add(gen);
+        return gen;
     }
 
     public Generator getGeneratorByLocation(Location location) {
