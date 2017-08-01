@@ -24,6 +24,10 @@ public class Generator {
 
     @Getter @Setter protected int runId;
 
+    /*
+     * Start runs whenever a generated is upgraded from broken state to lvl 1 or when a map is loaded.
+     * TODO: Run start.
+     */
     public void start() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(ew, new Runnable() {
             @Override
