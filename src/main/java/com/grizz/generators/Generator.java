@@ -1,7 +1,6 @@
 package com.grizz.generators;
 
 import com.grizz.Eggwars;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
@@ -14,22 +13,32 @@ import java.util.Collection;
 /**
  * Created by Gbtank.
  */
-@AllArgsConstructor
 public class Generator {
 
-    private Eggwars ew;
     @Getter private Location location;
     @Getter private GeneratorSettings settings;
     @Getter @Setter private GeneratorLevel level;
 
     @Getter @Setter protected int runId;
 
+    public Generator(Location location, GeneratorSettings settings, GeneratorLevel level) {
+
+    }
+
+    public boolean tryStart() {
+        if(level.getLevel() > 0) {
+            start();
+            return true;
+        }
+        return false;
+    }
+
     /*
      * Start runs whenever a generated is upgraded from broken state to lvl 1 or when a map is loaded.
      * TODO: Run start.
      */
-    public void start() {
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(ew, new Runnable() {
+    private void start() {
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(Eggwars.get(), new Runnable() {
             @Override
             public void run() {
                 /*

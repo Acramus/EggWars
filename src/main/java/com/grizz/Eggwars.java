@@ -9,6 +9,16 @@ import org.bukkit.plugin.messaging.PluginMessageListener;
  */
 public class Eggwars extends JavaPlugin implements PluginMessageListener {
 
+    // Singleton Structure
+
+    private static Eggwars ew = new Eggwars();
+
+    protected Eggwars() {}
+
+    public static Eggwars get() {
+        return ew;
+    }
+
     public void onEnable() {
         saveDefaultConfig();
     }
@@ -17,4 +27,5 @@ public class Eggwars extends JavaPlugin implements PluginMessageListener {
     public void onPluginMessageReceived(String channel, Player player, byte[] message) {
         // TODO: Configure BungeeCord
     }
+
 }

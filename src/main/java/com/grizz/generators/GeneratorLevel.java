@@ -21,10 +21,10 @@ public class GeneratorLevel {
      */
     @Getter @Setter private long genCooldown;
 
-    public GeneratorLevel(int level, int maxDrops, int secondsToDrop) {
+    public GeneratorLevel(int level, int maxDrops, long genCooldown) {
         this.level = level;
         this.maxDrops = maxDrops;
-        this.genCooldown = secondsToDrop * 20L;
+        this.genCooldown = genCooldown;
     }
 
 }
