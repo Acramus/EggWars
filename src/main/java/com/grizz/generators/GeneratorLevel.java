@@ -11,6 +11,7 @@ import lombok.Setter;
 public class GeneratorLevel {
 
     @Getter @Setter private int level;
+    @Getter @Setter private int maxDrops;
 
     /*
      * Note to self:
@@ -20,7 +21,5 @@ public class GeneratorLevel {
      * 1L is 0.05 second
      */
     @Getter @Setter private long genCooldown;
-
-    @Getter @Setter private int maxDrops;
 
 }

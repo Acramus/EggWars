@@ -1,0 +1,11 @@
+# If bungee is disabled, multiworld support is forced. Arena will be defined by worlds rather than server names and so will lobbies.
+bungee:
+    enabled: false
+# If MySQL is disabled, flatfile storage is forced. Remember, flatfile will NOT support cross-server statistics!
+# Note, there is currently no MongoDB support, and is not planned.
+mysql:
+    enabled: false
+    host: "localhost"
+    port: "3306"
+    username: "admin"
+    password: "password"

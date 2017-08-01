@@ -15,6 +15,6 @@ public class Eggwars extends JavaPlugin implements PluginMessageListener {
 
     @Override
     public void onPluginMessageReceived(String channel, Player player, byte[] message) {
-
+        // TODO: Configure BungeeCord
     }
 }
