@@ -40,6 +40,7 @@ public class Generator {
     /*
      * Start runs whenever a generated is upgraded from broken state to lvl 1 or when a map is loaded.
      * TODO: Run start.
+     * TODO: Fix visual bugs by using teleport and smaller dropItem height.
      */
     private void start() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(ew, new Runnable() {

@@ -14,6 +14,8 @@ import java.util.List;
 @Builder
 public class ItemBuilder {
 
+    // TODO: No colour displaynames or lore. Fix Builder, use no Lombok.
+
     private String displayName;
     private Material material;
     private int amount;

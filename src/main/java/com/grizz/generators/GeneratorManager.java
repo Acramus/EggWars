@@ -42,7 +42,7 @@ public class GeneratorManager {
                 conf.getInt("generator.z"));
         int level = conf.getInt("generator.start_level");
         String basePath = conf.getString("generator.base_file");
-        File base = new File(basePath.endsWith(".yml") ? basePath : basePath + ".yml");
+        File base = new File(ew.getDataFolder().getAbsolutePath() + "/" + (basePath.endsWith(".yml") ? basePath : basePath + ".yml"));
 
         YamlConfiguration baseConf = YamlConfiguration.loadConfiguration(base);
         Generator gen =  new Generator(ew, location, new GeneratorSettings(base), new GeneratorLevel(level,

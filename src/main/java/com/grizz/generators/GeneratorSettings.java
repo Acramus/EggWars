@@ -24,6 +24,7 @@ public class GeneratorSettings {
         YamlConfiguration conf = YamlConfiguration.loadConfiguration(file);
 
         this.name = conf.getString("name");
+        System.out.println(conf.getString("item.material"));
 
         ItemStack i = ItemBuilder.builder()
                 .material(Material.matchMaterial(conf.getString("item.material")))

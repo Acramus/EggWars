@@ -16,12 +16,15 @@ import java.io.File;
  */
 public class EggWars extends JavaPlugin implements PluginMessageListener {
 
+    // TODO: Remove test code when I get back to work
+
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if(!(sender instanceof Player)) return false;
         Player player = (Player) sender;
         if(cmd.getName().equalsIgnoreCase("test") && player.hasPermission("eggwars.test")) {
-            Generator gen = GeneratorManager.get().createFromFile(new File(getDataFolder().getAbsolutePath() + "example_gen.yml"));
+            System.out.println(getDataFolder().getAbsolutePath());
+            Generator gen = GeneratorManager.get().createFromFile(new File(getDataFolder().getAbsolutePath() + "/example_gen.yml"));
             gen.getLocation().clone().add(0, -1, 0).getBlock().setType(Material.SANDSTONE);
             gen.tryStart();
         }
@@ -29,14 +32,17 @@ public class EggWars extends JavaPlugin implements PluginMessageListener {
     }
 
     public void onEnable() {
+        System.out.println(getConfig().getCurrentPath());
+
+        getConfig().options().copyDefaults(true);
         saveDefaultConfig();
 
         // Activate managers
         GeneratorManager gm = new GeneratorManager(this);
 
-        File base = new File(getDataFolder().getAbsolutePath() + "base");
+        File base = new File(getDataFolder().getAbsolutePath() + "/base/");
         if(!base.exists()) base.mkdir();
-        File gens = new File(getDataFolder().getAbsolutePath() + "generators");
+        File gens = new File(getDataFolder().getAbsolutePath() + "/generators/");
         if(!gens.exists()) gens.mkdir();
     }
 
