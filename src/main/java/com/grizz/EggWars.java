@@ -14,7 +14,7 @@ import java.io.File;
 /**
  * Created by Gbtank.
  */
-public class Eggwars extends JavaPlugin implements PluginMessageListener {
+public class EggWars extends JavaPlugin implements PluginMessageListener {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
