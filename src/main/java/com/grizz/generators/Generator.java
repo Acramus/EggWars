@@ -1,6 +1,6 @@
 package com.grizz.generators;
 
-import com.grizz.Eggwars;
+import com.grizz.EggWars;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
@@ -15,14 +15,14 @@ import java.util.Collection;
  */
 public class Generator {
 
-    private Eggwars ew;
+    private EggWars ew;
     @Getter private Location location;
     @Getter private GeneratorSettings settings;
     @Getter @Setter private GeneratorLevel level;
 
     @Getter @Setter protected int runId;
 
-    public Generator(Eggwars ew, Location location, GeneratorSettings settings, GeneratorLevel level) {
+    public Generator(EggWars ew, Location location, GeneratorSettings settings, GeneratorLevel level) {
         this.ew = ew;
         this.location = location;
         this.settings = settings;

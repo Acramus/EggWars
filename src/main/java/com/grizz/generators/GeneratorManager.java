@@ -1,6 +1,6 @@
 package com.grizz.generators;
 
-import com.grizz.Eggwars;
+import com.grizz.EggWars;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -14,14 +14,14 @@ import java.util.Set;
  */
 public class GeneratorManager {
 
-    private Eggwars ew;
+    private EggWars ew;
     private Set<Generator> generators = new HashSet<>();
 
     // Singleton Structure
 
     private static GeneratorManager gm = null;
 
-    public GeneratorManager(Eggwars ew) {
+    public GeneratorManager(EggWars ew) {
         this.ew = ew;
         if(gm == null) {
             gm = this;
