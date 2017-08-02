@@ -57,9 +57,9 @@ public class EggWars extends JavaPlugin implements PluginMessageListener {
 
         if(!arenas.exists() && !base.exists() && !gens.exists()) {
             try {
-                copyResource("example_arena.yml", this.getDataFolder().getAbsolutePath() + "/arenas/example_arena.yml");
-                copyResource("example_base.yml", this.getDataFolder().getAbsolutePath() + "/base/example_base.yml");
-                copyResource("example_gen.yml", this.getDataFolder().getAbsolutePath() + "/generators/example_gen.yml");
+                copyResource("example_arena.yml", this.getDataFolder().getAbsolutePath() + getConfig().getString("arena_dir") + "example_arena.yml");
+                copyResource("example_base.yml", this.getDataFolder().getAbsolutePath() + getConfig().getString("base_dir") + "example_base.yml");
+                copyResource("example_gen.yml", this.getDataFolder().getAbsolutePath() + getConfig().getString("gen_dir") + "example_gen.yml");
                 copyResource("sign.yml", this.getDataFolder().getAbsolutePath() + "/example_sign.yml");
             } catch (IOException e) {
                 e.printStackTrace();
