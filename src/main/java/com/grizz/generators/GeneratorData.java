@@ -7,7 +7,7 @@ import org.bukkit.inventory.ItemStack;
 /**
  * Created by Gbtank.
  */
-public class GeneratorLevel {
+public class GeneratorData {
 
     @Getter @Setter private ItemStack upgradeItem;
 
@@ -24,7 +24,7 @@ public class GeneratorLevel {
      */
     @Getter @Setter private long genCooldown;
 
-    public GeneratorLevel(ItemStack upgradeItem, int level, int maxDrops, long genCooldown) {
+    public GeneratorData(ItemStack upgradeItem, int level, int maxDrops, long genCooldown) {
         this.upgradeItem = upgradeItem;
         this.level = level;
         this.maxDrops = maxDrops;

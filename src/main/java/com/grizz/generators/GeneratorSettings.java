@@ -17,7 +17,7 @@ public class GeneratorSettings {
 
     @Getter @Setter private String name;
     @Getter @Setter private ItemStack item;
-    @Getter private Map<Integer, GeneratorLevel>  upgradeMap = new HashMap<>();
+    @Getter private Map<Integer, GeneratorData>  upgradeMap = new HashMap<>();
 
     public GeneratorSettings(File file) {
         YamlConfiguration conf = YamlConfiguration.loadConfiguration(file);
@@ -35,7 +35,7 @@ public class GeneratorSettings {
         for(String level : conf.getConfigurationSection("upgrades").getKeys(false)) {
             if(conf.get("upgrades." + level + ".upgrade_item") == null || conf.get("upgrades." + (level + 1)) == null) {
                 upgradeMap.put(Integer.valueOf(level),
-                        new GeneratorLevel(null,
+                        new GeneratorData(null,
                                 Integer.valueOf(level),
                                 conf.getInt("upgrades." + level + ".max_drops"),
                                 conf.getLong("upgrades." + level + ".ticks")));
@@ -43,7 +43,7 @@ public class GeneratorSettings {
             }
             ItemBuilder upgradeBuilder = new ItemBuilder();
             upgradeMap.put(Integer.valueOf(level),
-                    new GeneratorLevel(upgradeBuilder.material(conf.getString("upgrades" + level + ".upgrade_item.material"))
+                    new GeneratorData(upgradeBuilder.material(conf.getString("upgrades" + level + ".upgrade_item.material"))
                             .amount(conf.getInt("upgrades" + level + ".upgrade_item.amount"))
                             .displayName(conf.getString("upgrades" + level + ".upgrade_item.display_name"))
                             .addMultipleLore(conf.getStringList("upgrades" + level + ".upgrade_item.lore"))

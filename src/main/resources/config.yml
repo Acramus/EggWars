@@ -1,3 +1,7 @@
+# Directories where the generators, bases and arenas are contained.
+base_dir: "/base/"
+gen_dir: "/generators/"
+arena_dir: "/arenas/"
 # If bungee is disabled, multiworld support is forced. Arena will be defined by worlds rather than server names and so will lobbies.
 bungee:
     enabled: false

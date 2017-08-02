@@ -5,3 +5,20 @@ arena:
   generators:
   - "example_gen"
   - "0:128:0;example_base:2"
+  team_size: 2
+  total_players: 4
+  teams:
+    0:
+      name: "Blue"
+      scoreboard_name: "&1Blue"
+      egg_loc:
+        x: 10
+        y: 20
+        z: 10
+    1:
+      name: "Red"
+      scoreboard_name: "&4Red"
+      egg_loc:
+        x: -10
+        y: 20
+        z: -10

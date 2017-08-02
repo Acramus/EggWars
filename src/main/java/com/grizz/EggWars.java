@@ -40,18 +40,16 @@ public class EggWars extends JavaPlugin implements PluginMessageListener {
         Player player = (Player) sender;
         if(cmd.getName().equalsIgnoreCase("test") && player.hasPermission("eggwars.test")) {
             System.out.println(getDataFolder().getAbsolutePath());
-            Generator gen = GeneratorManager.get().createFromFile(new File(getDataFolder().getAbsolutePath() + "/example_gen.yml"));
+            Generator gen = GeneratorManager.get().createFromFile("example_gen.yml");
             gen.getLocation().clone().add(0, -1, 0).getBlock().setType(Material.SANDSTONE);
             gen.tryStart();
         }
         return false;
     }
 
+    // TODO: Generate arena example!
     public void onEnable() {
         saveDefaultConfig();
-
-        // Activate managers
-        GeneratorManager gm = new GeneratorManager(this);
 
         File arenas = new File(getDataFolder().getAbsolutePath() + "/arenas/");
         File base = new File(getDataFolder().getAbsolutePath() + "/base/");
@@ -84,7 +82,7 @@ public class EggWars extends JavaPlugin implements PluginMessageListener {
 
 
     public void generateExamples() throws IOException {
-        File base = new File(getDataFolder() + "/" + "example_base.yml");
+        File base = new File(getDataFolder() + "/base/" + "example_base.yml");
         if(!base.exists()) {
             InputStream baseIn = null;
             FileOutputStream baseOut = null;
@@ -103,7 +101,7 @@ public class EggWars extends JavaPlugin implements PluginMessageListener {
             }
         }
 
-        File gen = new File(getDataFolder() + "/" + "example_gen.yml");
+        File gen = new File(getDataFolder() + "/generators/" + "example_gen.yml");
         if(!gen.exists()) {
             InputStream genIn = null;
             FileOutputStream genOut = null;
