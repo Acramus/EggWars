@@ -1,6 +1,7 @@
 package com.grizz.generators;
 
 import com.grizz.EggWars;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -15,7 +16,7 @@ import java.util.Set;
 public class GeneratorManager {
 
     private EggWars ew;
-    private Set<Generator> generators = new HashSet<>();
+    @Getter private Set<Generator> generators = new HashSet<>();
 
     // Singleton Structure
 
@@ -44,10 +45,8 @@ public class GeneratorManager {
         String basePath = conf.getString("generator.base_file");
         File base = new File(ew.getDataFolder().getAbsolutePath() + "/" + (basePath.endsWith(".yml") ? basePath : basePath + ".yml"));
 
-        YamlConfiguration baseConf = YamlConfiguration.loadConfiguration(base);
-        Generator gen =  new Generator(ew, location, new GeneratorSettings(base), new GeneratorLevel(level,
-                baseConf.getInt("upgrades." + level + ".max_drops"),
-                baseConf.getLong("upgrades." + level + ".ticks")));
+        GeneratorSettings settings = new GeneratorSettings(base);
+        Generator gen =  new Generator(ew, location, settings, settings.getUpgradeMap().get(level));
         generators.add(gen);
         return gen;
     }

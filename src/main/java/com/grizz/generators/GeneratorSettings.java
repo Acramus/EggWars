@@ -3,7 +3,6 @@ package com.grizz.generators;
 import com.grizz.utils.ItemBuilder;
 import lombok.Getter;
 import lombok.Setter;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
@@ -24,20 +23,32 @@ public class GeneratorSettings {
         YamlConfiguration conf = YamlConfiguration.loadConfiguration(file);
 
         this.name = conf.getString("name");
-        System.out.println(conf.getString("item.material"));
 
-        ItemStack i = ItemBuilder.builder()
-                .material(Material.matchMaterial(conf.getString("item.material")))
+        ItemBuilder dropBuilder = new ItemBuilder();
+        ItemStack i = dropBuilder.material(conf.getString("item.material"))
                 .amount(conf.getInt("item.amount"))
                 .displayName(conf.getString("item.display_name"))
-                .lores(conf.getStringList("item.lores"))
-                .build()
-                .toItem();
+                .addMultipleLore(conf.getStringList("item.lore"))
+                .build();
         this.item = i;
 
         for(String level : conf.getConfigurationSection("upgrades").getKeys(false)) {
+            if(conf.get("upgrades." + level + ".upgrade_item") == null || conf.get("upgrades." + (level + 1)) == null) {
+                upgradeMap.put(Integer.valueOf(level),
+                        new GeneratorLevel(null,
+                                Integer.valueOf(level),
+                                conf.getInt("upgrades." + level + ".max_drops"),
+                                conf.getLong("upgrades." + level + ".ticks")));
+                continue;
+            }
+            ItemBuilder upgradeBuilder = new ItemBuilder();
             upgradeMap.put(Integer.valueOf(level),
-                    new GeneratorLevel(Integer.valueOf(level),
+                    new GeneratorLevel(upgradeBuilder.material(conf.getString("upgrades" + level + ".upgrade_item.material"))
+                            .amount(conf.getInt("upgrades" + level + ".upgrade_item.amount"))
+                            .displayName(conf.getString("upgrades" + level + ".upgrade_item.display_name"))
+                            .addMultipleLore(conf.getStringList("upgrades" + level + ".upgrade_item.lore"))
+                            .build(),
+                            Integer.valueOf(level),
                             conf.getInt("upgrades." + level + ".max_drops"),
                             conf.getLong("upgrades." + level + ".ticks")));
         }

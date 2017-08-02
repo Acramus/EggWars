@@ -1,0 +1,42 @@
+name: "Example"
+upgrades:
+  0:
+    ticks: -1
+    max_drops: 0
+      upgrade_item:
+        material: "IRON_INGOT"
+        amount: 10
+        display_name: "&fIron"
+        lore:
+        - "This is"
+        - "a lore!"
+  1:
+    ticks: 100
+    max_drops: 5
+      upgrade_item:
+        material: "IRON_INGOT"
+        amount: 25
+        display_name: "&fIron"
+        lore:
+        - "This is"
+        - "a lore!"
+  2:
+    ticks: 20
+    max_drops: 10
+      upgrade_item:
+        material: "GOLD_INGOT"
+        amount: 15
+        display_name: "&eGold"
+        lore:
+        - "This is"
+        - "a lore!"
+  3:
+    ticks: 10
+    max_drops: 15
+item:
+  material: "DIAMOND"
+  amount: 1
+  display_name: "&bDiamond"
+  lore:
+  - "This is"
+  - "a lore!"

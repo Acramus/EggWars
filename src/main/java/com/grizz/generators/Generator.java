@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
+import org.bukkit.util.Vector;
 
 import java.util.Collection;
 
@@ -18,19 +19,19 @@ public class Generator {
     private EggWars ew;
     @Getter private Location location;
     @Getter private GeneratorSettings settings;
-    @Getter @Setter private GeneratorLevel level;
+    @Getter @Setter private GeneratorLevel genLevel;
 
     @Getter @Setter protected int runId;
 
-    public Generator(EggWars ew, Location location, GeneratorSettings settings, GeneratorLevel level) {
+    public Generator(EggWars ew, Location location, GeneratorSettings settings, GeneratorLevel genLevel) {
         this.ew = ew;
         this.location = location;
         this.settings = settings;
-        this.level = level;
+        this.genLevel = genLevel;
     }
 
     public boolean tryStart() {
-        if(level.getLevel() > 0) {
+        if(genLevel.getLevel() > 0) {
             start();
             return true;
         }
@@ -40,34 +41,41 @@ public class Generator {
     /*
      * Start runs whenever a generated is upgraded from broken state to lvl 1 or when a map is loaded.
      * TODO: Run start.
-     * TODO: Fix visual bugs by using teleport and smaller dropItem height.
+     * TODO: Change height values to make sure the "Generator" is defined under the location where items drop!!
      */
     private void start() {
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(ew, new Runnable() {
+        this.runId = Bukkit.getScheduler().scheduleSyncRepeatingTask(ew, new Runnable() {
             @Override
             public void run() {
                 /*
                  * Check if items on generator have exceeded the maximum
                  */
-                Collection<Entity> nearby = location.getWorld().getNearbyEntities(location.clone().add(0.5, 0.5, 0.5), 0.5, 0.5, 0.5);
+                Collection<Entity> nearby = location.getWorld().getNearbyEntities(location.clone().add(0.5, 0.25, 0.5), 0.25, 0.25, 0.25);
                 for(Entity entity : nearby) {
                     if(entity instanceof Item) {
-                        Item i = (Item) entity;
-                        if(i.getItemStack().getType().equals(settings.getItem().getType())) {
-                            if(i.getItemStack().getAmount() >= level.getMaxDrops()) {
-                                i.getItemStack().setAmount(i.getItemStack().getAmount() - 1);
+                        Item itemEnt = (Item) entity;
+                        if(itemEnt.getItemStack().getType().equals(settings.getItem().getType())) {
+                            if(itemEnt.getItemStack().getAmount() >= genLevel.getMaxDrops()) {
+                                itemEnt.getItemStack().setAmount(itemEnt.getItemStack().getAmount() - 1);
                             }
                         }
                     }
                 }
 
-                location.getWorld().dropItem(location.clone().add(0.5, 0.5, 0.5), settings.getItem());
+                Item drop = location.getWorld().dropItemNaturally(location.clone().add(0.5, 0.25, 0.5), settings.getItem());
+                // Low velocity stops items from falling off the edge.
+                drop.setVelocity(new Vector(0, 0.25, 0));
             }
-        }, 0L, level.getGenCooldown());
+        }, 0L, genLevel.getGenCooldown());
     }
 
+    // TODO: Start upgrade code.
     public void upgrade() {
-        // TODO: Start upgrade code.
+        // Check if the current level is the highest level by making sure the next level does not appear
+        if(!settings.getUpgradeMap().containsKey(genLevel.getLevel() + 1)) return;
+
+        Bukkit.getScheduler().cancelTask(runId);
+        // TODO: Write more code!
     }
 
 }
