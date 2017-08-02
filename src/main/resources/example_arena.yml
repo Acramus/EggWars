@@ -1,0 +1,7 @@
+server: false
+arena:
+  server_name: "Anything can go here, because 'server' is false!"
+  world: "world"
+  generators:
+  - "example_gen"
+  - "0:128:0;example_base:2"

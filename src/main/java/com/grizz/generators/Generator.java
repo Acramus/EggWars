@@ -16,15 +16,13 @@ import java.util.Collection;
  */
 public class Generator {
 
-    private EggWars ew;
     @Getter private Location location;
     @Getter private GeneratorSettings settings;
     @Getter @Setter private GeneratorLevel genLevel;
 
     @Getter @Setter protected int runId;
 
-    public Generator(EggWars ew, Location location, GeneratorSettings settings, GeneratorLevel genLevel) {
-        this.ew = ew;
+    public Generator(Location location, GeneratorSettings settings, GeneratorLevel genLevel) {
         this.location = location;
         this.settings = settings;
         this.genLevel = genLevel;
@@ -44,7 +42,7 @@ public class Generator {
      * TODO: Change height values to make sure the "Generator" is defined under the location where items drop!!
      */
     private void start() {
-        this.runId = Bukkit.getScheduler().scheduleSyncRepeatingTask(ew, new Runnable() {
+        this.runId = Bukkit.getScheduler().scheduleSyncRepeatingTask(EggWars.get(), new Runnable() {
             @Override
             public void run() {
                 /*

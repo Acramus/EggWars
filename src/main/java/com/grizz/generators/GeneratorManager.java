@@ -20,14 +20,9 @@ public class GeneratorManager {
 
     // Singleton Structure
 
-    private static GeneratorManager gm = null;
+    private static GeneratorManager gm = new GeneratorManager();
 
-    public GeneratorManager(EggWars ew) {
-        this.ew = ew;
-        if(gm == null) {
-            gm = this;
-        }
-    }
+    protected GeneratorManager() {  }
 
     public static GeneratorManager get() {
         return gm;
@@ -43,12 +38,17 @@ public class GeneratorManager {
                 conf.getInt("generator.z"));
         int level = conf.getInt("generator.start_level");
         String basePath = conf.getString("generator.base_file");
-        File base = new File(ew.getDataFolder().getAbsolutePath() + "/" + (basePath.endsWith(".yml") ? basePath : basePath + ".yml"));
+        File base = new File(EggWars.get().getDataFolder().getAbsolutePath() + "/" + (basePath.endsWith(".yml") ? basePath : basePath + ".yml"));
 
         GeneratorSettings settings = new GeneratorSettings(base);
-        Generator gen =  new Generator(ew, location, settings, settings.getUpgradeMap().get(level));
+        Generator gen =  new Generator(location, settings, settings.getUpgradeMap().get(level));
         generators.add(gen);
         return gen;
+    }
+
+    public GeneratorSign createSign() {
+        // TODO: Write code.
+        return null;
     }
 
     public Generator getGeneratorByLocation(Location location) {

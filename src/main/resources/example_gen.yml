@@ -5,3 +5,8 @@ generator:
   y: 128
   z: 0
   base_file: "example_base"
+  sign:
+    preset: "gen_sign"
+    text:
+    - "No Text Here!"
+    - "Because we have a preset!"

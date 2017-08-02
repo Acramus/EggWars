@@ -20,6 +20,17 @@ import java.io.InputStream;
  */
 public class EggWars extends JavaPlugin implements PluginMessageListener {
 
+    // Singleton Structure
+
+    private static EggWars ew = new EggWars();
+
+    protected EggWars() {}
+
+    public static EggWars get() {
+        return ew;
+    }
+
+
     // TODO: Remove test code when I get back to work
 
     // TODO: Move commands into neater packages
@@ -42,10 +53,11 @@ public class EggWars extends JavaPlugin implements PluginMessageListener {
         // Activate managers
         GeneratorManager gm = new GeneratorManager(this);
 
+        File arenas = new File(getDataFolder().getAbsolutePath() + "/arenas/");
         File base = new File(getDataFolder().getAbsolutePath() + "/base/");
         File gens = new File(getDataFolder().getAbsolutePath() + "/generators/");
 
-        if(!base.exists() && !gens.exists()) {
+        if(!arenas.exists() && !base.exists() && !gens.exists()) {
             try {
                 generateExamples();
             } catch (IOException e) {
@@ -53,6 +65,7 @@ public class EggWars extends JavaPlugin implements PluginMessageListener {
             }
         }
 
+        if(!arenas.exists()) arenas.mkdir();
         if(!base.exists()) base.mkdir();
         if(!gens.exists()) gens.mkdir();
 
@@ -70,7 +83,6 @@ public class EggWars extends JavaPlugin implements PluginMessageListener {
     }
 
 
-    // TODO: Read file from OutputStream
     public void generateExamples() throws IOException {
         File base = new File(getDataFolder() + "/" + "example_base.yml");
         if(!base.exists()) {

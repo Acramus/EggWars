@@ -2,8 +2,11 @@ package com.grizz.generators;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
+import org.bukkit.Location;
+import org.bukkit.block.Sign;
+
+import java.util.List;
 
 /**
  * Created by Gbtank.
@@ -11,8 +14,13 @@ import lombok.Setter;
 @AllArgsConstructor
 public class GeneratorSign {
 
-    @Getter @Setter private String serverName;
-    @NonNull @Getter @Setter private String worldName;
+    @Getter private Location location;
+    @Getter private Generator generator;
+
+    @Getter private Sign sign;
+    @Getter @Setter private List<String> lines;
+
+
 
     // TODO: Write all code for Sign on Generator.
 }
