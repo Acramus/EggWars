@@ -57,7 +57,10 @@ public class EggWars extends JavaPlugin implements PluginMessageListener {
 
         if(!arenas.exists() && !base.exists() && !gens.exists()) {
             try {
-                generateExamples();
+                copyResource("example_arena.yml", this.getDataFolder().getAbsolutePath() + "/arenas/example_arena.yml");
+                copyResource("example_base.yml", this.getDataFolder().getAbsolutePath() + "/base/example_base.yml");
+                copyResource("example_gen.yml", this.getDataFolder().getAbsolutePath() + "/generators/example_gen.yml");
+                copyResource("sign.yml", this.getDataFolder().getAbsolutePath() + "/example_sign.yml");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -80,43 +83,23 @@ public class EggWars extends JavaPlugin implements PluginMessageListener {
         // TODO: Configure BungeeCord
     }
 
-
-    public void generateExamples() throws IOException {
-        File base = new File(getDataFolder() + "/base/" + "example_base.yml");
-        if(!base.exists()) {
-            InputStream baseIn = null;
-            FileOutputStream baseOut = null;
-
-            try {
-                base.createNewFile();
-                baseIn = getResource("example_base.yml");
-                baseOut = new FileOutputStream(base);
-
-                int c;
-                while ((c = baseIn.read()) != -1) baseOut.write(c);
-
-            } finally {
-                if (baseIn != null) baseIn.close();
-                if(baseOut != null) baseOut.close();
-            }
-        }
-
-        File gen = new File(getDataFolder() + "/generators/" + "example_gen.yml");
-        if(!gen.exists()) {
-            InputStream genIn = null;
-            FileOutputStream genOut = null;
+    public void copyResource(String originPath, String finalPath) throws IOException {
+        File finalFile = new File(getDataFolder() + finalPath);
+        if(!finalFile.exists()) {
+            InputStream finalIn = null;
+            FileOutputStream finalOut = null;
 
             try {
-                gen.createNewFile();
-                genIn = getResource("example_gen.yml");
-                genOut = new FileOutputStream(gen);
+                finalFile.createNewFile();
+                finalIn = getResource(originPath);
+                finalOut = new FileOutputStream(finalFile);
 
                 int c;
-                while ((c = genIn.read()) != -1) genOut.write(c);
+                while ((c = finalIn.read()) != -1) finalOut.write(c);
 
             } finally {
-                if (genIn != null) genIn.close();
-                if(genOut != null) genOut.close();
+                if (finalIn != null) finalIn.close();
+                if(finalOut != null) finalOut.close();
             }
         }
     }
