@@ -34,7 +34,7 @@ public class GeneratorManager {
         if(this.getGeneratorByLocation(location) != null) {
             return null;
         }
-        File baseFile = new File(EggWars.get().getDataFolder().getAbsolutePath() + "/base/" + (basePath.endsWith(".yml") ? basePath : basePath + ".yml"));
+        File baseFile = new File(EggWars.get().getDataFolder().getAbsolutePath() + EggWars.get().getBaseDir() + (basePath.endsWith(".yml") ? basePath : basePath + ".yml"));
 
         GeneratorSettings settings = new GeneratorSettings(baseFile);
         Generator gen =  new Generator(location, settings, settings.getUpgradeMap().get(level));
@@ -43,7 +43,7 @@ public class GeneratorManager {
     }
 
     public Generator createFromFile(String genPath) {
-        File genFile = new File(EggWars.get().getDataFolder().getAbsolutePath() + "/generators/" + (genPath.endsWith(".yml") ? genPath : genPath + ".yml"));
+        File genFile = new File(EggWars.get().getDataFolder().getAbsolutePath() + EggWars.get().getGenDir() + (genPath.endsWith(".yml") ? genPath : genPath + ".yml"));
 
         YamlConfiguration conf = YamlConfiguration.loadConfiguration(genFile);
 
@@ -57,7 +57,7 @@ public class GeneratorManager {
         }
         int level = conf.getInt("generator.start_level");
         String basePath = conf.getString("generator.base_file");
-        File baseFile = new File(EggWars.get().getDataFolder().getAbsolutePath() + "/base/" + (basePath.endsWith(".yml") ? basePath : basePath + ".yml"));
+        File baseFile = new File(EggWars.get().getDataFolder().getAbsolutePath() + EggWars.get().getBaseDir() + (basePath.endsWith(".yml") ? basePath : basePath + ".yml"));
 
         GeneratorSettings settings = new GeneratorSettings(baseFile);
         Generator gen =  new Generator(location, settings, settings.getUpgradeMap().get(level));

@@ -2,6 +2,7 @@ package com.grizz;
 
 import com.grizz.generators.Generator;
 import com.grizz.generators.GeneratorManager;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -19,6 +20,10 @@ import java.io.InputStream;
  * Created by Gbtank.
  */
 public class EggWars extends JavaPlugin implements PluginMessageListener {
+
+    @Getter private String arenaDir;
+    @Getter private String baseDir;
+    @Getter private String genDir;
 
     // Singleton Structure
 
@@ -51,15 +56,19 @@ public class EggWars extends JavaPlugin implements PluginMessageListener {
     public void onEnable() {
         saveDefaultConfig();
 
+        this.arenaDir = getConfig().getString("arena_dir");
+        this.baseDir = getConfig().getString("base_dir");
+        this.genDir = getConfig().getString("gen_dir");
+
         File arenas = new File(getDataFolder().getAbsolutePath() + "/arenas/");
         File base = new File(getDataFolder().getAbsolutePath() + "/base/");
         File gens = new File(getDataFolder().getAbsolutePath() + "/generators/");
 
         if(!arenas.exists() && !base.exists() && !gens.exists()) {
             try {
-                copyResource("example_arena.yml", this.getDataFolder().getAbsolutePath() + getConfig().getString("arena_dir") + "example_arena.yml");
-                copyResource("example_base.yml", this.getDataFolder().getAbsolutePath() + getConfig().getString("base_dir") + "example_base.yml");
-                copyResource("example_gen.yml", this.getDataFolder().getAbsolutePath() + getConfig().getString("gen_dir") + "example_gen.yml");
+                copyResource("example_arena.yml", this.getDataFolder().getAbsolutePath() + arenaDir + "example_arena.yml");
+                copyResource("example_base.yml", this.getDataFolder().getAbsolutePath() + baseDir + "example_base.yml");
+                copyResource("example_gen.yml", this.getDataFolder().getAbsolutePath() + genDir + "example_gen.yml");
                 copyResource("sign.yml", this.getDataFolder().getAbsolutePath() + "/example_sign.yml");
             } catch (IOException e) {
                 e.printStackTrace();
