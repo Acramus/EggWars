@@ -1,21 +1,19 @@
 package com.grizz;
 
-import com.google.common.base.Charsets;
 import com.grizz.generators.Generator;
 import com.grizz.generators.GeneratorManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 
 /**
  * Created by Gbtank.
@@ -48,7 +46,11 @@ public class EggWars extends JavaPlugin implements PluginMessageListener {
         File gens = new File(getDataFolder().getAbsolutePath() + "/generators/");
 
         if(!base.exists() && !gens.exists()) {
-            generateExamples();
+            try {
+                generateExamples();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         if(!base.exists()) base.mkdir();
@@ -69,26 +71,42 @@ public class EggWars extends JavaPlugin implements PluginMessageListener {
 
 
     // TODO: Read file from OutputStream
-    public void generateExamples() {
+    public void generateExamples() throws IOException {
         File base = new File(getDataFolder() + "/" + "example_base.yml");
         if(!base.exists()) {
-            InputStream exampleBaseStream = getResource("example_base.yml");
-            YamlConfiguration exampleBase = YamlConfiguration.loadConfiguration(new InputStreamReader(exampleBaseStream, Charsets.UTF_8));
+            InputStream baseIn = null;
+            FileOutputStream baseOut = null;
+
             try {
-                exampleBase.save(base);
-            } catch (IOException e) {
-                e.printStackTrace();
+                base.createNewFile();
+                baseIn = getResource("example_base.yml");
+                baseOut = new FileOutputStream(base);
+
+                int c;
+                while ((c = baseIn.read()) != -1) baseOut.write(c);
+
+            } finally {
+                if (baseIn != null) baseIn.close();
+                if(baseOut != null) baseOut.close();
             }
         }
 
         File gen = new File(getDataFolder() + "/" + "example_gen.yml");
         if(!gen.exists()) {
-            InputStream exampleGenStream = getResource("example_gen.yml");
-            YamlConfiguration exampleGen = YamlConfiguration.loadConfiguration(new InputStreamReader(exampleGenStream, Charsets.UTF_8));
+            InputStream genIn = null;
+            FileOutputStream genOut = null;
+
             try {
-                exampleGen.save(getDataFolder() + "/" + exampleGen.getName());
-            } catch (IOException e) {
-                e.printStackTrace();
+                gen.createNewFile();
+                genIn = getResource("example_gen.yml");
+                genOut = new FileOutputStream(gen);
+
+                int c;
+                while ((c = genIn.read()) != -1) genOut.write(c);
+
+            } finally {
+                if (genIn != null) genIn.close();
+                if(genOut != null) genOut.close();
             }
         }
     }
