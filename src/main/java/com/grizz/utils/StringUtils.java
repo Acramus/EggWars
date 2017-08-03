@@ -9,6 +9,21 @@ import org.bukkit.World;
  */
 public class StringUtils {
 
+    public static String capitalise(String string) {
+        String result = "";
+        if(string.contains("_")) {
+            String[] split = string.split("_");
+            for(String s : split) {
+                String first = s.substring(0, 1);
+                String end = s.substring(1);
+                first.toUpperCase();
+                end.toLowerCase();
+                result = first + end + " ";
+            }
+        }
+        return result.substring(0, result.length() - 1);
+    }
+
     public static Location getLocationFromString(String string) {
         if(string.contains(":")) {
             String[] split = string.split(":");

@@ -1,9 +1,7 @@
 generator:
   start_level: 1
   world: "world"
-  x: 0
-  y: 128
-  z: 0
+  coords: "0:128:0"
   base_file: "example_base"
   sign:
     preset: "gen_sign"

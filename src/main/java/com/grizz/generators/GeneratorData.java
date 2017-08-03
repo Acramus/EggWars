@@ -22,13 +22,13 @@ public class GeneratorData {
      * 1L is 0.05 second
      *
      */
-    @Getter @Setter private long genCooldown;
+    @Getter @Setter private long interval;
 
-    public GeneratorData(ItemStack upgradeItem, int level, int maxDrops, long genCooldown) {
+    public GeneratorData(ItemStack upgradeItem, int level, int maxDrops, long interval) {
         this.upgradeItem = upgradeItem;
         this.level = level;
         this.maxDrops = maxDrops;
-        this.genCooldown = genCooldown;
+        this.interval = interval;
     }
 
 }

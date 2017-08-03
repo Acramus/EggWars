@@ -7,6 +7,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
@@ -20,6 +22,10 @@ import java.io.InputStream;
  * Created by Gbtank.
  */
 public class EggWars extends JavaPlugin implements PluginMessageListener {
+
+    @Getter private String prefix;
+
+    @Getter private FileConfiguration messenger;
 
     @Getter private String arenaDir;
     @Getter private String baseDir;
@@ -79,6 +85,8 @@ public class EggWars extends JavaPlugin implements PluginMessageListener {
         if(!base.exists()) base.mkdir();
         if(!gens.exists()) gens.mkdir();
 
+        messenger = YamlConfiguration.loadConfiguration(new File("messages.yml"));
+        prefix = messenger.getString("prefix");
     }
 
     public void onDisable() {

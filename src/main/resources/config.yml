@@ -15,3 +15,7 @@ mysql:
     port: "3306"
     username: "admin"
     password: "password"
+
+# Game-related options:
+# Respawn timer is in ticks (20 = 1 seconds) and -1 is no timer (may cause invincibility on respawn).
+respawn_timer: -1

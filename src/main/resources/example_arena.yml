@@ -2,6 +2,8 @@ server: false
 arena:
   server_name: "Anything can go here, because 'server' is false!"
   world: "world"
+  cages: true
+  shop: "shop_gui.yml"
   generators:
   - "example_gen"
   - "0:128:0;example_base:2"
@@ -10,15 +12,14 @@ arena:
   teams:
     0:
       name: "Blue"
-      scoreboard_name: "&1Blue"
-      egg_loc:
-        x: 10
-        y: 20
-        z: 10
+      colour: "&1"
+      egg_loc: "10:20:10"
+      cages:
+        0: "20:30:20"
+        1: "25:30:25"
     1:
       name: "Red"
-      scoreboard_name: "&4Red"
-      egg_loc:
-        x: -10
-        y: 20
-        z: -10
+      colour: "&4"
+      cages:
+        0: "-20:30:-20"
+        1: "-25:30:-25"

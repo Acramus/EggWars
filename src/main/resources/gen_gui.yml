@@ -1,0 +1,29 @@
+gui:
+  title: "Generator"
+  slots: 36
+  items:
+    10:
+      item:
+        material: "{GEN_DROP}"
+        amount: 1
+        display_name: "&9Information"
+        lore:
+        - "&rLevel: {GEN_LEVEL}"
+        - "&rInterval: {GEN_INTERVAL} seconds"
+    22:
+      item:
+        material: "BOOK"
+        amount: 1
+        display_name: "&9Close GeneratorMenu"
+        lore:
+        - "Click this to close the menu!"
+        action: "CLOSE"
+    16:
+      item:
+        material: "EXP_BOTTLE"
+        amount: 1
+        display_name: "&9Upgrade Generator"
+        lore:
+        - "&rLevel: {NEXT_LEVEL}"
+        - "&rInterval: {NEXT_INTERVAL} seconds"
+        action: "UPGRADE"

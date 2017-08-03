@@ -1,6 +1,7 @@
 package com.grizz.generators;
 
 import com.grizz.EggWars;
+import com.grizz.menu.MenuManager;
 import com.grizz.utils.StringUtils;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -10,6 +11,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -17,7 +19,6 @@ import java.util.Set;
  */
 public class GeneratorManager {
 
-    private EggWars ew;
     @Getter private Set<Generator> generators = new HashSet<>();
 
     // Singleton Structure
@@ -36,8 +37,11 @@ public class GeneratorManager {
         }
         File baseFile = new File(EggWars.get().getDataFolder().getAbsolutePath() + EggWars.get().getBaseDir() + (basePath.endsWith(".yml") ? basePath : basePath + ".yml"));
 
+        String menuPath = YamlConfiguration.loadConfiguration(baseFile).getString("menu");
+        File menuFile = new File(EggWars.get().getDataFolder().getAbsolutePath() + (menuPath.endsWith(".yml") ? menuPath : menuPath + ".yml"));
+
         GeneratorSettings settings = new GeneratorSettings(baseFile);
-        Generator gen =  new Generator(location, settings, settings.getUpgradeMap().get(level));
+        Generator gen =  new Generator(MenuManager.get().createFromFile(menuFile), location, settings, settings.getUpgradeMap().get(level));
         generators.add(gen);
         return gen;
     }
@@ -47,11 +51,7 @@ public class GeneratorManager {
 
         YamlConfiguration conf = YamlConfiguration.loadConfiguration(genFile);
 
-        Location location = new Location(
-                Bukkit.getWorld(conf.getString("generator.world")),
-                conf.getInt("generator.x"),
-                conf.getInt("generator.y"),
-                conf.getInt("generator.z"));
+        Location location = StringUtils.getLocationWithWorld(Bukkit.getWorld(conf.getString("generator.world")), conf.getString("generator.coords"));
         if(this.getGeneratorByLocation(location) != null) {
             return null;
         }
@@ -59,8 +59,11 @@ public class GeneratorManager {
         String basePath = conf.getString("generator.base_file");
         File baseFile = new File(EggWars.get().getDataFolder().getAbsolutePath() + EggWars.get().getBaseDir() + (basePath.endsWith(".yml") ? basePath : basePath + ".yml"));
 
+        String menuPath = YamlConfiguration.loadConfiguration(baseFile).getString("menu");
+        File menuFile = new File(EggWars.get().getDataFolder().getAbsolutePath() + (menuPath.endsWith(".yml") ? menuPath : menuPath + ".yml"));
+
         GeneratorSettings settings = new GeneratorSettings(baseFile);
-        Generator gen =  new Generator(location, settings, settings.getUpgradeMap().get(level));
+        Generator gen =  new Generator(MenuManager.get().createFromFile(menuFile), location, settings, settings.getUpgradeMap().get(level));
         generators.add(gen);
         return gen;
     }
@@ -92,13 +95,8 @@ public class GeneratorManager {
         return null;
     }
 
-    public Generator getGeneratorByLocation(Location location) {
-        for(Generator gen : generators) {
-            if(gen.getLocation().equals(location)) {
-                return gen;
-            }
-        }
-        return null;
+    public Optional<Generator> getGeneratorByLocation(final Location location) {
+        return generators.stream().filter(generator -> generator.getLocation().equals(location)).findFirst();
     }
 
 }
