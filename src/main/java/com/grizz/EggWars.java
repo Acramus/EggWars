@@ -31,11 +31,9 @@ public class EggWars extends JavaPlugin implements PluginMessageListener {
     @Getter private String baseDir;
     @Getter private String genDir;
 
-    // Singleton Structure
+    // Singleton Structure (Needs to have public constructor for Bukkit enabling)
 
-    private static EggWars ew = new EggWars();
-
-    protected EggWars() {}
+    private static EggWars ew = null;
 
     public static EggWars get() {
         return ew;
@@ -60,6 +58,8 @@ public class EggWars extends JavaPlugin implements PluginMessageListener {
 
     // TODO: Generate arena example!
     public void onEnable() {
+        ew = this;
+
         saveDefaultConfig();
 
         this.arenaDir = getConfig().getString("arena_dir");

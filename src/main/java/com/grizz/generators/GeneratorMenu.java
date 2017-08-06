@@ -1,6 +1,7 @@
-package com.grizz.menu;
+package com.grizz.generators;
 
-import com.grizz.generators.Generator;
+import com.grizz.menu.Menu;
+import com.grizz.menu.MenuItem;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.event.inventory.InventoryType;

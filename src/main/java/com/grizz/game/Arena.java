@@ -21,9 +21,8 @@ public class Arena {
 
     @Getter private List<Team> teams = new ArrayList<>();
 
-    @Getter private List<Player> players = new ArrayList<>();
     @Getter private int maxPlayers;
-
+    @Getter private List<Player> players = new ArrayList<>();
     @Getter private List<Player> spectators = new ArrayList<>();
 
     @Getter @Setter private long respawnTimer;

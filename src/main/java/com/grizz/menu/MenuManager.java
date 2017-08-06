@@ -1,5 +1,6 @@
 package com.grizz.menu;
 
+import com.grizz.generators.GeneratorMenu;
 import com.grizz.utils.ItemBuilder;
 import lombok.Getter;
 import org.bukkit.ChatColor;
@@ -39,7 +40,7 @@ public class MenuManager {
                     .displayName(conf.getString("gui.items." + key + ".display_name"))
                     .addMultipleLore(conf.getStringList("gui.items." + key + ".lore"))
                     .build();
-            MenuItem menuItem = null;
+            MenuItem menuItem;
             if(conf.getString("gui.items." + key + ".action") != null) {
                 String[] actionData = conf.getString("gui.items." + key + ".action").split(" ");
                 menuItem = new MenuItem(item, MenuAction.getActionByName(actionData[0]), actionData[1]);

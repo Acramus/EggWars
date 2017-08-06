@@ -2,7 +2,6 @@ package com.grizz.generators;
 
 import com.grizz.EggWars;
 import com.grizz.game.ArenaManager;
-import com.grizz.menu.GeneratorMenu;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;

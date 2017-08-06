@@ -5,17 +5,20 @@ gen_dir: "/generators/"
 
 # If bungee is disabled, multiworld support is forced. Arena will be defined by worlds rather than server names and so will lobbies.
 bungee:
-    enabled: false
+  enabled: false
 
 # If MySQL is disabled, flatfile storage is forced. Remember, flatfile will NOT support cross-server statistics!
 # Note, there is currently no MongoDB support, and is not planned.
 mysql:
-    enabled: false
-    host: "localhost"
-    port: "3306"
-    username: "admin"
-    password: "password"
+  enabled: false
+  host: "localhost"
+  port: "3306"
+  username: "admin"
+  password: "password"
 
 # Game-related options:
 # Respawn timer is in ticks (20 = 1 seconds) and -1 is no timer (may cause invincibility on respawn).
 respawn_timer: -1
+# Everyone in the winning team will have reward commands run (by the server):
+reward_commands:
+  - "/give {PLAYER} diamond 64"
