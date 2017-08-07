@@ -1,6 +1,7 @@
 package com.grizz.merchant;
 
 import com.grizz.menu.Menu;
+import com.grizz.nms.api.MerchantTrade;
 import lombok.Getter;
 
 import java.util.ArrayList;

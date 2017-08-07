@@ -20,9 +20,9 @@
         </dependency>
         <dependency>
             <groupId>com.grizz</groupId>
-            <artifactId>eggwars-plugin</artifactId>
+            <artifactId>eggwars-api</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <scope>provided</scope>
+            <type>jar</type>
         </dependency>
     </dependencies>
 

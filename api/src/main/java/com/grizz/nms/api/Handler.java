@@ -1,14 +1,15 @@
-package com.grizz.nms;
+package com.grizz.nms.api;
 
-import com.grizz.merchant.MerchantWrapper;
 import org.bukkit.entity.Player;
+
+import java.util.List;
 
 /**
  * Created by Gbtank.
  */
 public interface Handler {
 
-    void displayMerchantGUI(Player player, MerchantWrapper merchant, String name);
+    void displayMerchantGUI(Player player, List<MerchantTrade> trades, String name);
 
     void displayActionBar(Player player, String text);
 
