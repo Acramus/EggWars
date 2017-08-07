@@ -27,6 +27,7 @@ public class NMSHandler implements Handler {
         for(MerchantTrade trade : merchant.getMenuMap().get(name).getTrades()) {
             // Params: CraftItemStack slot1, CraftItemStack slot2, CraftItemStack result, int uses, int maxUses
             MerchantRecipe recipe = new MerchantRecipe(CraftItemStack.asNMSCopy(trade.getFirst()), CraftItemStack.asNMSCopy(trade.getSecond()), CraftItemStack.asNMSCopy(trade.getResult()), 0, 9999);
+            recipe.rewardExp = false;
             recipeList.add(recipe);
         }
 

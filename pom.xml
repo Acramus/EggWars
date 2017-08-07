@@ -14,6 +14,9 @@
         <module>v1_8_R3</module>
         <module>v1_9_R1</module>
         <module>v1_9_R2</module>
+        <module>v1_10_R1</module>
+        <module>v1_11_R1</module>
+        <module>v1_12_R1</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -79,7 +82,7 @@
             <scope>provided</scope>
         </dependency>
         <!-- CraftBukkit Dependencies for NMS -->
-        <!-- v1_9_R2 -->
+        <!-- com.grizz.nms.v1_10_R1 -->
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>craftbukkit</artifactId>
@@ -93,7 +96,7 @@
             <version>1.9.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-        <!-- v1_10_R1 -->
+        <!-- com.grizz.nms.v1_10_R1 -->
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>craftbukkit</artifactId>
@@ -122,7 +125,7 @@
             <artifactId>craftbukkit</artifactId>
             <version>1.8-R0.1-SNAPSHOT</version>
         </dependency>
-        <!-- v1_12_R1 -->
+        <!-- com.grizz.nms.v1_12_R1 -->
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>craftbukkit</artifactId>

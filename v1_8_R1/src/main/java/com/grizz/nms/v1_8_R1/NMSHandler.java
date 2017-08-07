@@ -10,6 +10,8 @@ import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_8_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 
+import java.lang.reflect.Field;
+
 /**
  * Created by Gbtank.
  */
@@ -27,6 +29,15 @@ public class NMSHandler implements Handler {
         for(MerchantTrade trade : merchant.getMenuMap().get(name).getTrades()) {
             // Params: CraftItemStack slot1, CraftItemStack slot2, CraftItemStack result, int uses, int maxUses
             MerchantRecipe recipe = new MerchantRecipe(CraftItemStack.asNMSCopy(trade.getFirst()), CraftItemStack.asNMSCopy(trade.getSecond()), CraftItemStack.asNMSCopy(trade.getResult()), 0, 9999);
+            try {
+                Field rewardExp = recipe.getClass().getDeclaredField("rewardExp");
+                rewardExp.setAccessible(true);
+                rewardExp.set(recipe, false);
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
             recipeList.add(recipe);
         }
 

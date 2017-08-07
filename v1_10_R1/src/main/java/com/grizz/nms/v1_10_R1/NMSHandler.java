@@ -1,13 +1,13 @@
-package com.grizz.nms.v1_9_R1;
+package com.grizz.nms.v1_10_R1;
 
 import com.grizz.merchant.MerchantTrade;
 import com.grizz.merchant.MerchantWrapper;
 import com.grizz.nms.Handler;
-import net.minecraft.server.v1_9_R1.*;
+import net.minecraft.server.v1_10_R1.*;
 import org.bukkit.ChatColor;
-import org.bukkit.craftbukkit.v1_9_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_9_R1.entity.CraftPlayer;
-import org.bukkit.craftbukkit.v1_9_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_10_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_10_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_10_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 
 /**

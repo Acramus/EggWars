@@ -1,13 +1,13 @@
-package com.grizz.nms.v1_9_R1;
+package com.grizz.nms.v1_12_R1;
 
 import com.grizz.merchant.MerchantTrade;
 import com.grizz.merchant.MerchantWrapper;
 import com.grizz.nms.Handler;
-import net.minecraft.server.v1_9_R1.*;
+import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.ChatColor;
-import org.bukkit.craftbukkit.v1_9_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_9_R1.entity.CraftPlayer;
-import org.bukkit.craftbukkit.v1_9_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_12_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_12_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 
 /**
@@ -45,7 +45,7 @@ public class NMSHandler implements Handler {
     public void displayActionBar(Player player, String text) {
         String msg = ChatColor.translateAlternateColorCodes('&', text.replace("_", " "));
         IChatBaseComponent cbc = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + msg + "\"}");
-        PacketPlayOutChat ppoc = new PacketPlayOutChat(cbc, (byte) 2);
+        PacketPlayOutChat ppoc = new PacketPlayOutChat(cbc, ChatMessageType.GAME_INFO);
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(ppoc);
     }
 
