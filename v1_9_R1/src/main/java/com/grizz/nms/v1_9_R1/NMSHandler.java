@@ -1,13 +1,13 @@
-package nms.v1_8_R1;
+package com.grizz.nms.v1_9_R1;
 
 import com.grizz.merchant.MerchantTrade;
 import com.grizz.merchant.MerchantWrapper;
 import com.grizz.nms.Handler;
-import net.minecraft.server.v1_8_R1.*;
+import net.minecraft.server.v1_9_R1.*;
 import org.bukkit.ChatColor;
-import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
-import org.bukkit.craftbukkit.v1_8_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_9_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_9_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_9_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 
 /**
@@ -30,17 +30,20 @@ public class NMSHandler implements Handler {
             recipeList.add(recipe);
         }
 
+        // craftVillager.setRecipes(recipeList);
+        // craftVillager.setRiches(0);
+
         // Villager opens trade with player
-        villager.a_(trader);
+        villager.setTradingPlayer(trader);
         trader.openTrade(villager);
         // Add player Statistic for talking to villagers
-        trader.b(StatisticList.F);
+        trader.b(StatisticList.H);
     }
 
     @Override
     public void displayActionBar(Player player, String text) {
         String msg = ChatColor.translateAlternateColorCodes('&', text.replace("_", " "));
-        IChatBaseComponent cbc = ChatSerializer.a("{\"text\": \"" + msg + "\"}");
+        IChatBaseComponent cbc = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + msg + "\"}");
         PacketPlayOutChat ppoc = new PacketPlayOutChat(cbc, (byte) 2);
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(ppoc);
     }
@@ -48,9 +51,9 @@ public class NMSHandler implements Handler {
     @Override
     public void displayTitle(Player player, String title, double fadeIn, double stay, double fadeOut) {
         String msg = ChatColor.translateAlternateColorCodes('&', title.replace("_", " "));
-        IChatBaseComponent cbc = ChatSerializer.a("{\"text\": \"" + msg + "\"}");
-        PacketPlayOutTitle titlePacket = new PacketPlayOutTitle(EnumTitleAction.TITLE, cbc);
-        PacketPlayOutTitle timePacket = new PacketPlayOutTitle(EnumTitleAction.TIMES, null, (int) Math.round(fadeIn * 20), (int) Math.round(stay * 20), (int) Math.round(fadeOut * 20));
+        IChatBaseComponent cbc = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + msg + "\"}");
+        PacketPlayOutTitle titlePacket = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TITLE, cbc);
+        PacketPlayOutTitle timePacket = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TIMES, null, (int) Math.round(fadeIn * 20), (int) Math.round(stay * 20), (int) Math.round(fadeOut * 20));
 
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(timePacket);
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(titlePacket);
@@ -59,9 +62,9 @@ public class NMSHandler implements Handler {
     @Override
     public void displaySubTitle(Player player, String subtitle, double fadeIn, double stay, double fadeOut) {
         String msg = ChatColor.translateAlternateColorCodes('&', subtitle.replace("_", " "));
-        IChatBaseComponent cbc = ChatSerializer.a("{\"text\": \"" + msg + "\"}");
-        PacketPlayOutTitle subTitlePacket = new PacketPlayOutTitle(EnumTitleAction.SUBTITLE, cbc);
-        PacketPlayOutTitle timePacket = new PacketPlayOutTitle(EnumTitleAction.TIMES, null, (int) Math.round(fadeIn * 20), (int) Math.round(stay * 20), (int) Math.round(fadeOut * 20));
+        IChatBaseComponent cbc = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + msg + "\"}");
+        PacketPlayOutTitle subTitlePacket = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.SUBTITLE, cbc);
+        PacketPlayOutTitle timePacket = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TIMES, null, (int) Math.round(fadeIn * 20), (int) Math.round(stay * 20), (int) Math.round(fadeOut * 20));
 
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(timePacket);
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(subTitlePacket);

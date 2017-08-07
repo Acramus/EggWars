@@ -12,6 +12,8 @@
         <module>v1_8_R2</module>
         <module>v1_8_R3</module>
         <module>v1_8_R3</module>
+        <module>v1_9_R1</module>
+        <module>v1_9_R2</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -77,13 +79,6 @@
             <scope>provided</scope>
         </dependency>
         <!-- CraftBukkit Dependencies for NMS -->
-        <!-- v1_9_R1 -->
-        <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>craftbukkit</artifactId>
-            <version>1.9-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
         <!-- v1_9_R2 -->
         <dependency>
             <groupId>org.bukkit</groupId>

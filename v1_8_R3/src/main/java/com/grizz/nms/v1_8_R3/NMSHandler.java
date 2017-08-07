@@ -1,4 +1,4 @@
-package nms.v1_8_R3;
+package com.grizz.nms.v1_8_R3;
 
 import com.grizz.merchant.MerchantTrade;
 import com.grizz.merchant.MerchantWrapper;
