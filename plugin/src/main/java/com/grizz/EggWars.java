@@ -39,9 +39,6 @@ public class EggWars extends JavaPlugin implements PluginMessageListener {
         return ew;
     }
 
-
-    // TODO: Remove test code when I get back to work
-
     // TODO: Move commands into neater packages
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -49,10 +46,20 @@ public class EggWars extends JavaPlugin implements PluginMessageListener {
         Player player = (Player) sender;
         if(cmd.getName().equalsIgnoreCase("test") && player.hasPermission("eggwars.test")) {
             System.out.println(getDataFolder().getAbsolutePath());
-            Generator gen = GeneratorManager.get().createFromFile("example_gen.yml");
+            Generator gen = GeneratorManager.get().createFromFile("/generators/example_gen.yml");
             gen.getLocation().clone().add(0, -1, 0).getBlock().setType(Material.SANDSTONE);
             gen.tryStart();
         }
+        /* try {
+            // Handler handler = (Handler) Class.forName("com.grizz.nms.v1_8_R2.NMSHandler").newInstance();
+            // handler.displayActionBar(player, "Herro!");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } */
         return false;
     }
 
