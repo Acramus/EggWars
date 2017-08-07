@@ -5,9 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.grizz</groupId>
-    <artifactId>EggWars</artifactId>
+    <artifactId>eggwars-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <modules>
+        <module>v1_8_R1</module>
+        <module>v1_8_R2</module>
+        <module>v1_8_R3</module>
+        <module>v1_8_R3</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <build>
         <finalName>EggWars</finalName>
@@ -71,27 +77,6 @@
             <scope>provided</scope>
         </dependency>
         <!-- CraftBukkit Dependencies for NMS -->
-        <!-- v1_8_R1 -->
-        <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>craftbukkit</artifactId>
-            <version>1.8-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- v1_8_R2 -->
-        <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>craftbukkit</artifactId>
-            <version>1.8.3-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- v1_8_R3 -->
-        <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>craftbukkit</artifactId>
-            <version>1.8.8-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
         <!-- v1_9_R1 -->
         <dependency>
             <groupId>org.bukkit</groupId>
@@ -149,11 +134,6 @@
             <version>1.12-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>craftbukkit</artifactId>
-            <version>1.8-R0.1-SNAPSHOT</version>
-        </dependency>
         <!-- End of CraftBukkit Dependencies -->
     </dependencies>
 
@@ -169,10 +149,6 @@
         <repository>
             <id>stealthyone-repo</id>
             <url>http://repo.stealthyone.com/content/groups/public</url>
-        </repository>
-        <repository>
-            <id>inventive-repo</id>
-            <url>https://repo.inventivetalent.org/content/repositories/releases</url>
         </repository>
     </repositories>
 
