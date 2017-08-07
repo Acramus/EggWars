@@ -40,7 +40,7 @@ Thumbs.db
 
 # IntelliJ files #
 ##################
-.idea/
-target/
-out/
+.idea/*
+target/*
+out/*
 *.iml
