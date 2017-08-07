@@ -1,16 +1,14 @@
 package com.grizz.game;
 
 import com.grizz.EggWars;
+import com.grizz.merchant.MerchantWrapper;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by Gbtank.
@@ -24,6 +22,7 @@ public class Arena {
     @Getter private int maxPlayers;
     @Getter private List<Player> players = new ArrayList<>();
     @Getter private List<Player> spectators = new ArrayList<>();
+    @Getter private Set<MerchantWrapper> merchants = new HashSet<>();
 
     @Getter @Setter private long respawnTimer;
 
@@ -49,26 +48,22 @@ public class Arena {
     }
 
     public void spawnPlayers() {
-        for(Team team : teams) {
-            team.spawnPlayers();
-        }
+        teams.forEach(Team::spawnPlayers);
     }
 
     public void spawnVillagers() {
-
+        merchants.forEach(MerchantWrapper::spawnVillager);
     }
 
     public void start() {
 
     }
 
+    /*
+     * Resets arena 3 seconds after game end, non-configurable.
+     */
     public void end() {
-        Bukkit.getScheduler().scheduleSyncDelayedTask(EggWars.get(), new Runnable() {
-            @Override
-            public void run() {
-                reset();
-            }
-        }, 60L);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(EggWars.get(), this::reset, 60L);
     }
 
     public void reset() {

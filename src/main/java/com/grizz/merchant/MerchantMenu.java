@@ -3,14 +3,14 @@ package com.grizz.merchant;
 import com.grizz.menu.Menu;
 import lombok.Getter;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Gbtank.
  */
 public class MerchantMenu extends Menu {
 
-    @Getter private Map<Integer, MerchantTrade> tradeMap = new HashMap<>();
+    @Getter private List<MerchantTrade> trades = new ArrayList<>();
 
 }
