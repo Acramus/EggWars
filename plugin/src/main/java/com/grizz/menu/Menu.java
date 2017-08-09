@@ -10,7 +10,8 @@ import org.bukkit.inventory.Inventory;
  */
 public abstract class Menu {
 
-    @Getter @Setter public String filePath;
+    @Getter @Setter public String fileName;
+    @Getter @Setter public String section;
 
     @Getter @Setter public String title;
     @Getter @Setter public int slots;

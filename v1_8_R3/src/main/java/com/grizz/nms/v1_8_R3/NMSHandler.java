@@ -1,7 +1,7 @@
 package com.grizz.nms.v1_8_R3;
 
+import com.grizz.merchant.MerchantTrade;
 import com.grizz.nms.api.Handler;
-import com.grizz.nms.api.MerchantTrade;
 import net.minecraft.server.v1_8_R3.*;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent.ChatSerializer;
 import org.bukkit.ChatColor;

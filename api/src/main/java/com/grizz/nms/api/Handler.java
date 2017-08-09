@@ -1,5 +1,6 @@
 package com.grizz.nms.api;
 
+import com.grizz.merchant.MerchantTrade;
 import org.bukkit.entity.Player;
 
 import java.util.List;

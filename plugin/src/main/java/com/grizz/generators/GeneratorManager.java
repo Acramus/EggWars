@@ -41,7 +41,8 @@ public class GeneratorManager {
         File menuFile = new File(EggWars.get().getDataFolder().getAbsolutePath() + (menuPath.endsWith(".yml") ? menuPath : menuPath + ".yml"));
 
         GeneratorSettings settings = new GeneratorSettings(baseFile);
-        Generator gen =  new Generator(MenuManager.get().createFromFile(menuFile), location, settings, settings.getUpgradeMap().get(level));
+        Generator gen =  new Generator(null, location, settings, settings.getUpgradeMap().get(level));
+        gen.setMenu(MenuManager.get().createGeneratorMenuFromFile(menuFile, gen));
         generators.add(gen);
         return gen;
     }
@@ -63,7 +64,8 @@ public class GeneratorManager {
         File menuFile = new File(EggWars.get().getDataFolder().getAbsolutePath() + (menuPath.endsWith(".yml") ? menuPath : menuPath + ".yml"));
 
         GeneratorSettings settings = new GeneratorSettings(baseFile);
-        Generator gen =  new Generator(MenuManager.get().createFromFile(menuFile), location, settings, settings.getUpgradeMap().get(level));
+        Generator gen =  new Generator(null, location, settings, settings.getUpgradeMap().get(level));
+        gen.setMenu(MenuManager.get().createGeneratorMenuFromFile(menuFile, gen));
         generators.add(gen);
         return gen;
     }

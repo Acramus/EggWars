@@ -27,9 +27,9 @@ public class GeneratorSign {
             line = line.replace("{GEN_NAME}", generator.getSettings().getName()
             .replace("{GEN_LEVEL}", generator.getData().getLevel() + "")
             .replace("{GEN_DROP}", StringUtils.capitalise(generator.getSettings().getItem().getType().name()))
-            .replace("{GEN_INTERVAL}", ((int) generator.getData().getInterval() / 20L) + "")
+            .replace("{GEN_INTERVAL}", Math.round(generator.getData().getInterval() / 20L) + "")
             .replace("{NEXT_LEVEL}", generator.getData().getLevel() + 1 + "")
-            .replace("{NEXT_INTERVAL}", ((int) generator.getSettings().getUpgradeMap().get(generator.getData().getLevel() + 1).getInterval()) + ""));
+            .replace("{NEXT_INTERVAL}", Math.round(generator.getSettings().getUpgradeMap().get(generator.getData().getLevel() + 1).getInterval() / 20L) + ""));
 
             lines.set(index, ChatColor.translateAlternateColorCodes('&',line));
         }

@@ -1,9 +1,10 @@
 package com.grizz.menu;
 
+import com.grizz.EggWars;
+import com.grizz.generators.Generator;
 import com.grizz.generators.GeneratorMenu;
 import com.grizz.utils.ItemBuilder;
 import lombok.Getter;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
@@ -30,8 +31,9 @@ public class MenuManager {
         return mm;
     }
 
-    public GeneratorMenu createFromFile(File menuFile) {
+    public GeneratorMenu createGeneratorMenuFromFile(File menuFile, Generator generator) {
         YamlConfiguration conf = YamlConfiguration.loadConfiguration(menuFile);
+        GeneratorMenu menu = new GeneratorMenu(menuFile.getAbsolutePath().substring(menuFile.getAbsolutePath().indexOf("/EggWars/") + 9), conf.getString("gui.title"), conf.getInt("gui.slots"));
         Map<Integer, MenuItem> slotMap = new HashMap<>();
         for(String key : conf.getConfigurationSection("gui.items").getKeys(false)) {
             ItemBuilder builder = new ItemBuilder();
@@ -39,20 +41,29 @@ public class MenuManager {
                     .amount(conf.getInt("gui.items." + key + ".amount"))
                     .displayName(conf.getString("gui.items." + key + ".display_name"))
                     .addMultipleLore(conf.getStringList("gui.items." + key + ".lore"))
+                    .durability(conf.getInt("gui.items." + key + ".durability"))
                     .build();
             MenuItem menuItem;
             if(conf.getString("gui.items." + key + ".action") != null) {
                 String[] actionData = conf.getString("gui.items." + key + ".action").split(" ");
-                menuItem = new MenuItem(item, MenuAction.getActionByName(actionData[0]), actionData[1]);
+                menuItem = new MenuItem(menu, item, MenuAction.getActionByName(actionData[0]), actionData[1]);
             } else {
-                menuItem = new MenuItem(item, null, "");
+                menuItem = new MenuItem(menu, item, null, "");
             }
             slotMap.put(Integer.valueOf(key), menuItem);
         }
-
-        GeneratorMenu menu = new GeneratorMenu(ChatColor.translateAlternateColorCodes('&', conf.getString("gui.title")), conf.getInt("gui.slots"), slotMap);
+        menu.setGenerator(generator);
+        menu.setSlotMap(slotMap);
         menus.add(menu);
         return menu;
+    }
+
+    public Menu getMenuByNameAndSection(String name, String section) {
+        File file = new File(EggWars.get().getDataFolder() + "/" + name);
+        for(Menu menu : menus) {
+            if(menu.getFileName().equalsIgnoreCase(name) && menu.getSection().equalsIgnoreCase(section)) return menu;
+        }
+        return null;
     }
 
 }

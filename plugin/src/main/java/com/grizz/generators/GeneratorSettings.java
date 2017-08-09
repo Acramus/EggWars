@@ -29,6 +29,7 @@ public class GeneratorSettings {
                 .amount(conf.getInt("item.amount"))
                 .displayName(conf.getString("item.display_name"))
                 .addMultipleLore(conf.getStringList("item.lore"))
+                .durability(conf.getInt("item.durability"))
                 .build();
         this.item = i;
 
@@ -43,10 +44,11 @@ public class GeneratorSettings {
             }
             ItemBuilder upgradeBuilder = new ItemBuilder();
             upgradeMap.put(Integer.valueOf(level),
-                    new GeneratorData(upgradeBuilder.material(conf.getString("upgrades" + level + ".upgrade_item.material"))
-                            .amount(conf.getInt("upgrades" + level + ".upgrade_item.amount"))
-                            .displayName(conf.getString("upgrades" + level + ".upgrade_item.display_name"))
-                            .addMultipleLore(conf.getStringList("upgrades" + level + ".upgrade_item.lore"))
+                    new GeneratorData(upgradeBuilder.material(conf.getString("upgrades." + level + ".upgrade_item.material"))
+                            .amount(conf.getInt("upgrades." + level + ".upgrade_item.amount"))
+                            .displayName(conf.getString("upgrades." + level + ".upgrade_item.display_name"))
+                            .addMultipleLore(conf.getStringList("upgrades." + level + ".upgrade_item.lore"))
+                            .durability(conf.getInt("upgrades." + level + ".upgrade_item.durability"))
                             .build(),
                             Integer.valueOf(level),
                             conf.getInt("upgrades." + level + ".max_drops"),

@@ -1,7 +1,7 @@
 package com.grizz.nms.v1_9_R2;
 
+import com.grizz.merchant.MerchantTrade;
 import com.grizz.nms.api.Handler;
-import com.grizz.nms.api.MerchantTrade;
 import net.minecraft.server.v1_9_R2.*;
 import org.bukkit.ChatColor;
 import org.bukkit.craftbukkit.v1_9_R2.CraftWorld;

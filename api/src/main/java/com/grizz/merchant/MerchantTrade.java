@@ -1,4 +1,4 @@
-package com.grizz.nms.api;
+package com.grizz.merchant;
 
 import lombok.Getter;
 import org.bukkit.inventory.ItemStack;

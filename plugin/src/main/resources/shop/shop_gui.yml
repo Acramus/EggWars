@@ -9,7 +9,6 @@ gui:
         display_name: "&9Close GeneratorMenu"
         lore:
         - "Click this to close the menu!"
-        action: "O"
     1:
       item:
         material: "BOOK"
@@ -25,4 +24,3 @@ gui:
     6:
     7:
     8:
-    9:

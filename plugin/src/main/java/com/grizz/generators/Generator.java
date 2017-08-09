@@ -19,9 +19,10 @@ import java.util.Collection;
  */
 public class Generator {
 
-    @Getter private GeneratorMenu menu;
     @Getter private Location location;
     @Getter private GeneratorSettings settings;
+
+    @Getter @Setter private GeneratorMenu menu;
     @Getter @Setter private GeneratorData data;
 
     @Getter @Setter protected int runId;
@@ -77,21 +78,18 @@ public class Generator {
         player.openInventory(menu.getInventory());
     }
 
-    public void upgrade(Player player) {
+    public void upgrade(final Player player) {
         // Check if the current level is the highest level by making sure the next level does not appear
         if(!settings.getUpgradeMap().containsKey(data.getLevel() + 1)) return;
 
         if(player.getInventory().contains(settings.getUpgradeMap().get(data.getLevel() + 1).getUpgradeItem())) {
             player.getInventory().remove(settings.getUpgradeMap().get(data.getLevel() + 1).getUpgradeItem());
             Bukkit.getScheduler().cancelTask(runId);
-            for(Player p : ArenaManager.get().getArenaByPlayer(player).get().getTeamByPlayer(player).get().getPlayers()) {
-                p.sendMessage(
-                        ChatColor.translateAlternateColorCodes('&', EggWars.get().getPrefix() + EggWars.get().getMessenger().getString("gen_upgrade")
-                                .replace("{PLAYER}", player.getName())
-                                .replace("{GEN_NAME}", settings.getName())
-                                .replace("{GEN_LEVEL}", data.getLevel() + ""))
-                                .replace("{NEXT_LEVEL}", data.getLevel() + 1 + ""));
-            }
+            ArenaManager.get().getArenaByPlayer(player).ifPresent(a -> a.getTeamByPlayer(player).ifPresent(t -> t.getPlayers().forEach(p -> p.sendMessage(ChatColor.translateAlternateColorCodes('&', EggWars.get().getPrefix() + EggWars.get().getMessenger().getString("gen_upgrade")
+                    .replace("{PLAYER}", player.getName())
+                    .replace("{GEN_NAME}", settings.getName())
+                    .replace("{GEN_LEVEL}", data.getLevel() + ""))
+                    .replace("{NEXT_LEVEL}", data.getLevel() + 1 + "")))));
             this.data = settings.getUpgradeMap().get(data.getLevel() + 1);
             // TODO: Add firework code with firework colour variable.
         } else {

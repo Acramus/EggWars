@@ -18,6 +18,7 @@ public class ItemBuilder {
     private String displayName;
     private Material material;
     private int amount;
+    private int durability;
     private List<String> loreList = new ArrayList<>();
 
     public ItemBuilder displayName(String displayName) {
@@ -59,12 +60,18 @@ public class ItemBuilder {
         return this;
     }
 
+    public ItemBuilder durability(int durability) {
+        this.durability = durability;
+        return this;
+    }
+
     public ItemStack build() {
         ItemStack item = new ItemStack(material, amount);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(displayName);
         meta.setLore(loreList);
         item.setItemMeta(meta);
+        item.setDurability((short) durability);
         return item;
     }
 

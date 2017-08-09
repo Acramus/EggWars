@@ -2,6 +2,7 @@ package com.grizz;
 
 import com.grizz.generators.Generator;
 import com.grizz.generators.GeneratorManager;
+import com.grizz.nms.api.Handler;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -40,6 +41,8 @@ public class EggWars extends JavaPlugin implements PluginMessageListener {
     }
 
     // TODO: Move commands into neater packages
+
+    // TODO: Remove test code once done!
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if(!(sender instanceof Player)) return false;
@@ -50,16 +53,12 @@ public class EggWars extends JavaPlugin implements PluginMessageListener {
             gen.getLocation().clone().add(0, -1, 0).getBlock().setType(Material.SANDSTONE);
             gen.tryStart();
         }
-        /* try {
-            // Handler handler = (Handler) Class.forName("com.grizz.nms.v1_8_R2.NMSHandler").newInstance();
-            // handler.displayActionBar(player, "Herro!");
-        } catch (ClassNotFoundException e) {
+        try {
+            Handler handler = (Handler) Class.forName("com.grizz.nms.v1_8_R2.NMSHandler").newInstance();
+            handler.displayActionBar(player, "Hello!");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } */
+        }
         return false;
     }
 
@@ -79,10 +78,10 @@ public class EggWars extends JavaPlugin implements PluginMessageListener {
 
         if(!arenas.exists() && !base.exists() && !gens.exists()) {
             try {
-                copyResource("example_arena.yml", this.getDataFolder().getAbsolutePath() + arenaDir + "example_arena.yml");
-                copyResource("example_base.yml", this.getDataFolder().getAbsolutePath() + baseDir + "example_base.yml");
-                copyResource("example_gen.yml", this.getDataFolder().getAbsolutePath() + genDir + "example_gen.yml");
-                copyResource("sign.yml", this.getDataFolder().getAbsolutePath() + "/example_sign.yml");
+                copyResource("examples/example_arena.yml", this.getDataFolder().getAbsolutePath() + arenaDir + "examples/example_arena.yml");
+                copyResource("examples/example_base.yml", this.getDataFolder().getAbsolutePath() + baseDir + "examples/example_base.yml");
+                copyResource("examples/example_gen.yml", this.getDataFolder().getAbsolutePath() + genDir + "examples/example_gen.yml");
+                copyResource("generators/gen_sign.yml", this.getDataFolder().getAbsolutePath() + "/gen_sign.yml");
             } catch (IOException e) {
                 e.printStackTrace();
             }

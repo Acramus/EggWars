@@ -25,11 +25,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>mkremins</groupId>
-            <artifactId>fanciful</artifactId>
-            <version>0.4.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.18</version>
@@ -41,6 +36,7 @@
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
+        <!-- NMSHandler Dependencies -->
         <dependency>
             <groupId>com.grizz</groupId>
             <artifactId>eggwars-v1_8_R1</artifactId>
@@ -89,6 +85,7 @@
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
+        <!-- End of NMSHandler Dependencies -->
     </dependencies>
 
 
@@ -100,9 +97,11 @@
                 <targetPath>.</targetPath>
                 <filtering>true</filtering>
                 <directory>src/main/resources</directory>
+                <!--
                 <includes>
-                    <include>plugin.yml</include>
+                    <include>*</include>
                 </includes>
+                -->
             </resource>
         </resources>
         <plugins>
